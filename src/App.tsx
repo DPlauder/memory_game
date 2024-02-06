@@ -1,8 +1,8 @@
-import CardList from "./components/CardList";
+import CardListContainer from "./components/CardList.container";
 function App() {
   return (
     <>
-      <CardList />
+      <CardListContainer />
     </>
   );
 }
