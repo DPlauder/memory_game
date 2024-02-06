@@ -6,13 +6,13 @@ interface Props {
 export default function Header({ highscore, score }: Props) {
   return (
     <div className="header">
-      <h1>Memory Game</h1>
-      <div className="scoreBox">
-        <h2>Highscore</h2>
+      <h3 className="ue1">Memory Game</h3>
+      <article className="scoreBox">
+        <h4>Highscore</h4>
         <div>{highscore}</div>
-        <h2>Score</h2>
+        <h4>Score</h4>
         <div>{score}</div>
-      </div>
+      </article>
     </div>
   );
 }

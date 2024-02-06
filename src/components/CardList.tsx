@@ -10,7 +10,7 @@ interface Props {
 export default function CardList({ cards, clickHandler }: Props) {
   return cards.map((card) => {
     return (
-      <div key={card.url} className="card">
+      <div key={card.url}>
         <CardListItem url={card.url} handleClick={clickHandler} card={card} />
       </div>
     );

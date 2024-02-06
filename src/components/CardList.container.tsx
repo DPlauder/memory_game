@@ -64,7 +64,7 @@ export default function CardListContainer() {
   return (
     <div className="container">
       <Header highscore={highscore} score={score} />
-      <div className="cardContainer">
+      <div className="grid custom-grid">
         <CardList cards={allCards} clickHandler={handleClick} />
       </div>
     </div>
