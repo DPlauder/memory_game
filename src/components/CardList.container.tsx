@@ -1,11 +1,13 @@
-import { ICard, IPokemon } from "./ts/interfaces/global_interfaces";
+import { ICard } from "./ts/interfaces/global_interfaces";
 import { useState, useEffect } from "react";
 import CardList from "./CardList";
+import Header from "./ScoreItem";
 
 export default function CardListContainer() {
   const [allCards, setAllCards] = useState<ICard[]>([]);
   const [clickedCards, setClickedCards] = useState<ICard[]>([]);
   const [err, setErr] = useState<Error | null>(null);
+  const [score, setScore] = useState(0);
   const [highscore, setHighscore] = useState(0);
 
   useEffect(() => {
@@ -34,15 +36,37 @@ export default function CardListContainer() {
     if (pokemon) {
       const isClicked = clickedCards.find((card) => card.name === pokemon.name);
       if (isClicked) {
-        if (highscore < setClickedCards.length)
-          setHighscore(setClickedCards.length);
+        if (highscore < score) {
+          setHighscore(score);
+        }
+        setScore(0);
         setClickedCards([]);
       } else {
         setClickedCards((prev) => [...prev, { ...pokemon }]);
+        setScore(score + 1);
       }
+      shuffle();
     }
     console.log(clickedCards);
     console.log(clickedCards.length);
   };
-  return <CardList cards={allCards} clickHandler={handleClick} />;
+  const shuffle = () => {
+    const shuffledCards = [...allCards];
+    for (let i = shuffledCards.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledCards[i], shuffledCards[j]] = [
+        shuffledCards[j],
+        shuffledCards[i],
+      ];
+    }
+    setAllCards(shuffledCards);
+  };
+  return (
+    <div className="container">
+      <Header highscore={highscore} score={score} />
+      <div className="cardContainer">
+        <CardList cards={allCards} clickHandler={handleClick} />
+      </div>
+    </div>
+  );
 }

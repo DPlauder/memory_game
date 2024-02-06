@@ -22,7 +22,7 @@ export default function CardListItem({ url, handleClick, card }: Props) {
   }, []);
 
   return (
-    <div className="card" onClick={() => handleClick(card)}>
+    <div onClick={() => handleClick(card)}>
       <h1>{pokemon?.name}</h1>
       <img src={pokemon?.sprites.front_default} />
     </div>
